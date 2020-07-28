@@ -1,5 +1,9 @@
 const handleRegister = (db, bcrypt) => (req, res) => {
     const { email, name, password } = req.body; //gets the input info from body
+    if (!email || !name || !password) {
+        return res.status(400).json('Incorrect form submission');
+    }
+    
     const hash = bcrypt.hashSync(password);
 
     //transaction used when action is to be done on two or more table

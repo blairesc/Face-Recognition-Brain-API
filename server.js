@@ -25,11 +25,13 @@ app.use(express.json());
 app.use(cors());
 
 //End Points
-app.get('/', (req, res)=> { res.send(database.users) })
+app.get('/', (req, res) => { res.send(database.users) })
 app.post('/signin', signin.handleSignin(db, bcrypt)) //dependency injection
 app.post('/register', register.handleRegister(db, bcrypt))
 app.get('/profile/:id', profile.handleProfile(db))
 app.put('/image', image.handleImage(db))
+app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
+
 
 app.listen(3000, ()=> {
     console.log('app is running on port 3000');
