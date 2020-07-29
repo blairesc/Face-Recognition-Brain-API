@@ -9,13 +9,15 @@ const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
 //connect server to database
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0 
+
 const db = knex({
     client: 'pg',
     connection: {
-      connectionString : process.env.DATABASE_URL,
-      ssl : true
+      connectionString: process.env.DATABASE_URL,
+      ssl: true
     }
-});
+})
 
 const app = express();
 app.use(express.urlencoded({extended: false}));
